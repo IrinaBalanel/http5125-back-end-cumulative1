@@ -1,0 +1,13 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@Model.TeacherFirstName @Model.TeacherLastName</h2>
+<p>ID in the school database: @Model.TeacherId</p>
+<p>Employee number: @Model.EmployeeNumber</p>
+<p>Hire date: @Model.HireDate</p>
+<p>Salary: $@Model.Salary</p>
+
+@*Initiative question 2: Output classes taught by a particular teacher*@ 
+<p>Courses: @Model.ClassName</p>
