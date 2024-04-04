@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+<script src="~/Scripts/validation.js"></script>
+<h2>New Teacher</h2>
+
+<form id="TeacherForm" method="POST" action="/Teacher/Create">
+
+    <div>
+        <label for="TeacherFirstName">First Name</label>
+        <input type="text" name="TeacherFirstName" id="TeacherFirstName"/>
+    </div>
+    <div>
+        <label for="TeacherLastName">Last Name</label>
+        <input type="text" name="TeacherLastName" id="TeacherLastName"/>
+    </div>
+    <div>
+        <label for="EmployeeNumber">Employee Number</label>
+        <input type="text" name="EmployeeNumber" id="EmployeeNumber" />
+    </div>
+    <div>
+        <label for="Salary">Salary</label>
+        <input type="text" name="Salary" id="Salary" />
+    </div>
+    <div>
+        <input type="submit" value="Add Teacher" />
+    </div>
+
+
+</form>
+

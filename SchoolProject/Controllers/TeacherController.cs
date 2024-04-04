@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Diagnostics;
 
 namespace SchoolProject.Controllers
 {
@@ -32,6 +33,50 @@ namespace SchoolProject.Controllers
             return View(NewTeacher);
         }
 
+        //GET: /Teacher/New/ -> returns a page with a form fields for creating a new teacher in DB
+        public ActionResult New()
+        { 
+           
+            return View(); 
+        }
+
+        [HttpPost]
+        //POST: /Teacher/Create/ -> returns List.cshtml
+        public ActionResult Create(string TeacherFirstName, string TeacherLastName, string EmployeeNumber, decimal Salary)
+        {
+            TeacherDataController TeacherController = new TeacherDataController();
+
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherFirstName = TeacherFirstName;
+            NewTeacher.TeacherLastName = TeacherLastName;
+            NewTeacher.EmployeeNumber = EmployeeNumber;
+            NewTeacher.Salary = Salary;
+
+            TeacherController.AddTeacher(NewTeacher);
+
+            return RedirectToAction("List");
+        }
+
+
+        //GET: /Teacher/DeleteConfirm/ -> a webpade which asks the user for confirmation to delete
+        public ActionResult DeleteConfirm(int id) 
+        {
+            TeacherDataController TeacherController = new TeacherDataController();
+            Teacher SelectedTeacher = TeacherController.FindTeacher(id);
+            
+            return View(SelectedTeacher);
+        }
+
+
+        [HttpPost]
+        //POST: /Teacher/Delete/{id} -> redirects to List.cshtml view of teachers
+        public ActionResult Delete(int id) 
+        {
+            TeacherDataController TeacherController = new TeacherDataController();
+            TeacherController.DeleteTeacher(id);
+
+            return RedirectToAction("List");
+        }
 
     }
 }
