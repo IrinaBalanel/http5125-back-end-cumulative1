@@ -22,6 +22,11 @@ namespace SchoolProject
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/validation").Include(
+                        "~/Scripts/validation.js"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

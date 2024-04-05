@@ -42,24 +42,41 @@ namespace SchoolProject.Controllers
 
         [HttpPost]
         //POST: /Teacher/Create/ -> returns List.cshtml
-        public ActionResult Create(string TeacherFirstName, string TeacherLastName, string EmployeeNumber, decimal Salary)
+        /*        public ActionResult Create(string TeacherFirstName, string TeacherLastName, string EmployeeNumber, decimal Salary)
+                {
+                    TeacherDataController TeacherController = new TeacherDataController();
+
+                        Teacher NewTeacher = new Teacher();
+                        NewTeacher.TeacherFirstName = TeacherFirstName;
+                        NewTeacher.TeacherLastName = TeacherLastName;
+                        NewTeacher.EmployeeNumber = EmployeeNumber;
+                        NewTeacher.Salary = Salary;
+
+                        TeacherController.AddTeacher(NewTeacher);
+
+                        return RedirectToAction("List");
+
+                }*/
+
+        public ActionResult Create(Teacher NewTeacher)
         {
-            TeacherDataController TeacherController = new TeacherDataController();
-
-            Teacher NewTeacher = new Teacher();
-            NewTeacher.TeacherFirstName = TeacherFirstName;
-            NewTeacher.TeacherLastName = TeacherLastName;
-            NewTeacher.EmployeeNumber = EmployeeNumber;
-            NewTeacher.Salary = Salary;
-
-            TeacherController.AddTeacher(NewTeacher);
-
-            return RedirectToAction("List");
+            // Check if the data passes the validation from Teacher model.
+            // If validation is passed, the form is submitted to the databse and it redirects to List.cshtml
+            if (ModelState.IsValid)
+            {
+                TeacherDataController TeacherController = new TeacherDataController();
+                TeacherController.AddTeacher(NewTeacher);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                // If insertion fails, the form remains the same with error messages
+                return View("New");
+            }
         }
 
-
-        //GET: /Teacher/DeleteConfirm/ -> a webpade which asks the user for confirmation to delete
-        public ActionResult DeleteConfirm(int id) 
+            //GET: /Teacher/DeleteConfirm/ -> a webpade which asks the user for confirmation to delete
+            public ActionResult DeleteConfirm(int id) 
         {
             TeacherDataController TeacherController = new TeacherDataController();
             Teacher SelectedTeacher = TeacherController.FindTeacher(id);

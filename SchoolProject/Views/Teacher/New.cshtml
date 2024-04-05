@@ -1,19 +1,20 @@
-﻿
+﻿@model SchoolProject.Models.Teacher
 @{
     ViewBag.Title = "New";
 }
-<script src="~/Scripts/validation.js"></script>
+
 <h2>New Teacher</h2>
 
 <form id="TeacherForm" method="POST" action="/Teacher/Create">
-
+    @*Use span to display the error*@
+    @*Use @Html.ValidationMessageFor to show error messages related to first name and last name properties of Teacher model*@
     <div>
         <label for="TeacherFirstName">First Name</label>
-        <input type="text" name="TeacherFirstName" id="TeacherFirstName"/>
+        <input type="text" name="TeacherFirstName" id="TeacherFirstName" required/><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherFirstName)</span>
     </div>
     <div>
         <label for="TeacherLastName">Last Name</label>
-        <input type="text" name="TeacherLastName" id="TeacherLastName"/>
+        <input type="text" name="TeacherLastName" id="TeacherLastName" required/><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherLastName)</span>
     </div>
     <div>
         <label for="EmployeeNumber">Employee Number</label>
@@ -29,4 +30,7 @@
 
 
 </form>
+
+<script defer src="~/Scripts/validation.js"></script>
+@Scripts.Render("~/bundles/validation")
 
