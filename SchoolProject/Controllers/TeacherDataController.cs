@@ -167,9 +167,10 @@ namespace SchoolProject.Controllers
 
             //Create a first command and sql query which finds a teacher by id
             MySqlCommand Cmd = Conn.CreateCommand ();
-            string query = "select * from teachers where teacherid=" + id;
+            string query = "select * from teachers where teacherid=@id";
             Cmd.CommandText = query;
-
+            Cmd.Parameters.AddWithValue("@id", id);
+            Cmd.Prepare();
             //Execute the command
             MySqlDataReader ResultSet = Cmd.ExecuteReader ();
 
@@ -194,8 +195,10 @@ namespace SchoolProject.Controllers
             //Create a second command and sql query which joins teachers table and classes table to show classes taught by this particular teacher
 
             MySqlCommand Cmd2 = Conn.CreateCommand();
-            string query2 = "select classes.classname from teachers join classes on classes.teacherid = teachers.teacherid where teachers.teacherid= " + id;
+            string query2 = "select classes.classname from teachers join classes on classes.teacherid = teachers.teacherid where teachers.teacherid=@id";
             Cmd2.CommandText = query2;
+            Cmd.Parameters.AddWithValue("@id", id);
+            Cmd.Prepare();
 
             //Execute the command and retrive information
             MySqlDataReader ResultSet2 = Cmd2.ExecuteReader();
