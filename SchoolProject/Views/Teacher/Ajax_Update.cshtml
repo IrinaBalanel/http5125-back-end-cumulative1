@@ -1,0 +1,46 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Ajax_Update";
+}
+
+<h2>Ajax_Update</h2>
+
+<div id="show">
+    <nav>
+        <a class="navigateto" href="/Teacher/List">Back To Teachers</a>
+    </nav>
+    <h2>Update @Model.TeacherFirstName @Model.TeacherLastName</h2>
+    @{
+        /* AJAX Request to update author */
+        /* No form submission needed */
+        /* button onclick will handle form submission */
+        /* Each item has an ID for validation && ajax submission */
+
+
+    }
+    <div class="input">
+        <label for="TeacherFname">First Name:</label>
+        <input type="text" id="TeacherFname" name="TeacherFname" value="@Model.TeacherFirstName" />
+
+    </div>
+    <div class="input">
+        <label for="TeacherLname">Last Name:</label>
+        <input type="text" id="TeacherLname" name="TeacherLname" value="@Model.TeacherLastName" />
+
+    </div>
+    <div class="input">
+        <label for="EmployeeNumber">Email:</label>
+        <input type="text" id="EmployeeNumber" name="EmployeeNumber" value="@Model.EmployeeNumber" />
+    </div>
+    <div class="input">
+        <label for="Salary">Salary:</label>
+        <input type="text" id="Salary" name="Salary" value="@Model.Salary" />
+    </div>
+    @{
+        //UpdateTeacher() is a JS method defined in /Scripts/validation.js
+    }
+    <button onclick="UpdateTeacher(@Model.TeacherId);">Update Teacher</button>
+</div>
+
+<script defer src="~/Scripts/validation.js"></script>
+@Scripts.Render("~/bundles/validation")

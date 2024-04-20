@@ -12,6 +12,8 @@ using System.Net.NetworkInformation;
 using Google.Protobuf.WellKnownTypes;
 using Mysqlx.Datatypes;
 using Org.BouncyCastle.Asn1.Cms;
+using System.Diagnostics;
+using System.Web.Http.Cors;
 
 
 namespace SchoolProject.Controllers
@@ -189,7 +191,7 @@ namespace SchoolProject.Controllers
                 NewTeacher.Salary = Convert.ToDecimal(ResultSet["salary"]);
             }
 
-            //close the first data reader before executing the second query
+/*            //close the first data reader before executing the second query
             ResultSet.Close();
 
             //Create a second command and sql query which joins teachers table and classes table to show classes taught by this particular teacher
@@ -202,9 +204,9 @@ namespace SchoolProject.Controllers
 
             //Execute the command and retrive information
             MySqlDataReader ResultSet2 = Cmd2.ExecuteReader();
-            
+
             //Create a new list of classes
-            List<string>Classes = new List<string>();
+            List<string> Classes = new List<string>();
 
             //Loop through the resultset and output all classes
             while (ResultSet2.Read())
@@ -212,7 +214,7 @@ namespace SchoolProject.Controllers
 
                 string Class = ResultSet2["classname"].ToString();
                 Classes.Add(Class);
-               
+
             }
 
 
@@ -222,7 +224,7 @@ namespace SchoolProject.Controllers
             string concatenatedClassNames = string.Join(", ", Classes);
 
             // Assign the concatenated string to NewTeacher.ClassName
-            NewTeacher.ClassName = concatenatedClassNames;
+            NewTeacher.ClassName = concatenatedClassNames;*/
 
             //Close connection
             Conn.Close();
@@ -279,6 +281,7 @@ namespace SchoolProject.Controllers
         /// </example>
 
 
+
         [HttpPost]
         [Route("api/TeacherData/DeleteTeacher/{TeacherId}")]
 
@@ -293,6 +296,46 @@ namespace SchoolProject.Controllers
             Cmd.Parameters.AddWithValue("@teacherid", TeacherId);
             Cmd.ExecuteNonQuery();
             Conn.Close();
+        }
+
+
+        /// <summary>
+        /// Receives teacher data and an teacher id and updates the teacher in the database with that id
+        /// </summary>
+        /// <returns>String with the status of the operation</returns>
+        /// <example>
+        /// POST api/TeacherData/UpdateTeacher/12
+        /// POST CONTENT
+        /// {
+        ///     "TeacherFirstName":"Irina"
+        ///     "TeacherLastName":"Balanel"
+        ///     "EmployeeNumber":"T123"
+        ///     "Salary":"30.00"
+        /// }
+        /// </example>
+        [HttpGet]
+        [Route("api/TeacherData/UpdateTeacher/{TeacherId}")]
+        [EnableCors(origins: "*", methods: "*", headers: "*")]
+
+        public string UpdateTeacher(int TeacherId, [FromBody]Teacher UpdatedTeacher)
+        {
+
+            MySqlConnection Conn = School.AccessDatabase();
+            Conn.Open();
+            MySqlCommand Cmd = Conn.CreateCommand();
+            string query = "update teachers set teacherfname=@firstname, teacherlname=@lastname, employeenumber=@employeenumber, salary=@salary where teacherid=@id";
+            Cmd.CommandText = query;
+            Cmd.Parameters.AddWithValue("@firstname", UpdatedTeacher.TeacherFirstName);
+            Cmd.Parameters.AddWithValue("@lastname", UpdatedTeacher.TeacherLastName);
+            Cmd.Parameters.AddWithValue("@employeenumber", UpdatedTeacher.EmployeeNumber);
+            Cmd.Parameters.AddWithValue("@hiredate", UpdatedTeacher.HireDate);
+            Cmd.Parameters.AddWithValue("@salary", UpdatedTeacher.Salary);
+            Cmd.Parameters.AddWithValue("@id", TeacherId);
+            Cmd.Prepare();
+            Cmd.ExecuteNonQuery();
+            Conn.Close();
+
+            return "Teacher was updated successfully";
         }
 
     }

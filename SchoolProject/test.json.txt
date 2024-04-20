@@ -1,0 +1,9 @@
+{
+
+	"TeacherFirstName":"Marina",
+	"TeacherLastName":"Balanel",
+	"EmployeeNumber":"T123",
+	"HireDate":"2024-03-31 00:00:00",
+	"Salary":"30.00"
+
+}

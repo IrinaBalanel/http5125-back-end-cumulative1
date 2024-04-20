@@ -20,10 +20,13 @@ namespace SchoolProject.Models
         [Required(ErrorMessage = "Last name is required")]
         public string TeacherLastName { get; set; }
 
+        [Required(ErrorMessage = "Employee number is required")]
         public string EmployeeNumber { get; set; }
 
         public DateTimeOffset HireDate { get; set; }
 
+        /*[Required(ErrorMessage = "Salary is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Salary must be greater than zero.")]*/
         public decimal Salary { get; set; }
 
         public string ClassName { get; set; }

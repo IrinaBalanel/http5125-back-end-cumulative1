@@ -10,19 +10,19 @@
     @*Use @Html.ValidationMessageFor to show error messages related to first name and last name properties of Teacher model*@
     <div>
         <label for="TeacherFirstName">First Name</label>
-        <input type="text" name="TeacherFirstName" id="TeacherFirstName" required/><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherFirstName)</span>
+        <input type="text" name="TeacherFirstName" id="TeacherFirstName"/><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherFirstName)</span>
     </div>
     <div>
         <label for="TeacherLastName">Last Name</label>
-        <input type="text" name="TeacherLastName" id="TeacherLastName" required/><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherLastName)</span>
+        <input type="text" name="TeacherLastName" id="TeacherLastName"/><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherLastName)</span>
     </div>
     <div>
         <label for="EmployeeNumber">Employee Number</label>
-        <input type="text" name="EmployeeNumber" id="EmployeeNumber" />
+        <input type="text" name="EmployeeNumber" id="EmployeeNumber"/><span style="color: red;">@Html.ValidationMessageFor(model => model.EmployeeNumber)</span>
     </div>
     <div>
         <label for="Salary">Salary</label>
-        <input type="text" name="Salary" id="Salary" />
+        <input type="text" name="Salary" id="Salary"/><span style="color: red;">@Html.ValidationMessageFor(model => model.Salary)</span>
     </div>
     <div>
         <input type="submit" value="Add Teacher" />

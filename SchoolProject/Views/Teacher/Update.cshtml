@@ -1,0 +1,36 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update teacher</h2>
+
+<form id="UpdateTeacherForm" method="POST" action="/Teacher/Edit/@Model.TeacherId">
+    @*Use span to display the error*@
+    @*Use @Html.ValidationMessageFor to show error messages related to first name and last name properties of Teacher model*@
+
+    <div>
+        <label for="UpdateTeacherFirstName">First Name</label>
+        <input type="text" name="UpdateTeacherFirstName" id="UpdateTeacherFirstName" value="@Model.TeacherFirstName" /><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherFirstName)</span>
+    </div>
+    <div>
+        <label for="UpdateTeacherLastName">Last Name</label>
+        <input type="text" name="UpdateTeacherFirstName" id="UpdateTeacherLastName" value="@Model.TeacherLastName" /><span style="color: red;">@Html.ValidationMessageFor(model => model.TeacherLastName)</span>
+    </div>
+    <div>
+        <label for="UpdateEmployeeNumber">Employee Number</label>
+        <input type="text" name="UpdateEmployeeNumber" id="UpdateEmployeeNumber" value="@Model.EmployeeNumber" /><span style="color: red;">@Html.ValidationMessageFor(model => model.EmployeeNumber)</span>
+    </div>
+    <div>
+        <label for="UpdateSalary">Salary</label>
+        <input type="text" name="UpdateSalary" id="UpdateSalary" value="@Model.Salary" /><span style="color: red;">@Html.ValidationMessageFor(model => model.Salary)</span>
+    </div>
+    <div>
+        <input type="submit" value="Update Teacher" />
+    </div>
+
+</form>
+
+<script defer src="~/Scripts/validation.js"></script>
+@Scripts.Render("~/bundles/validation")
+
